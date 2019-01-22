@@ -81,10 +81,12 @@ int valid_move(Piece* piece, int to_i, int to_j) {
     if (to_j+1 != piece->j && to_j-1 != piece->j) {
         return 0;
     }
-    if (piece->c == white && piece->i != to_i+1) {
+    if (piece->c == white &&
+        (piece->i != to_i+1)) {
         return 0;
     }
-    if (piece->c == black && piece->i != to_i-1) {
+    if (piece->c == black &&
+            (piece->i != to_i-1)) {
         return 0;
     }
     return 1;
@@ -95,26 +97,14 @@ int move_piece(Piece* board[][BOARD_SIZE], Piece* piece, int to_i, int to_j) {
     if (!in_board(to_i, to_j) || board[to_i][to_j] || !valid_move(piece, to_i, to_j)) {
         return 0;
     }
+    board[piece->i][piece->j] = NULL;
+    board[to_i][to_j] = piece;
+    return 1;
 }
 
 
 int main() {
     Piece* board[BOARD_SIZE][BOARD_SIZE];
-
     start_board(board);
-
     print_board(board);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
